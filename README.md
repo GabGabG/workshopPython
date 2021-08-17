@@ -2,19 +2,6 @@
 
 Bonjour à toutes et à tous! Bienvenue dans ce repositoire servant de point d'accès central au code, aux capsules et aux ressources supplémentaires en lien avec le _workshop_ et capsules _Python_ préparés par Daniel Côté et Gabriel Genest.
 
-# Plan du site
-Le site est construit de la manière suivante
-
-1. [Code en lien avec la capsule 1](https://github.com/GabGabG/PythonBio/tree/main/Capsule1)
-2. [Code en lien avec la capsule 2](https://github.com/GabGabG/PythonBio/tree/main/Capsule2)
-3. [Code en lien avec le _workshop_](https://github.com/GabGabG/PythonBio/tree/main/Workshop)
-4. [Code utilitaire / supplémentaire](https://github.com/GabGabG/PythonBio/tree/main/CodeUtilitaireSupplementaire) (pas terminé...)
-
-## Diapositives
-Vous trouverez les diapositives utilisées pour les capsules:
-
-1. Capsule 1 (**bientôt disponible**, ajouter le lien)
-2. Capsule 2 (**bientôt disponible**, ajouter le lien)
 
 ## Vidéos
 Les capsules vidéos sont disponibles sur YouTube:
@@ -50,7 +37,6 @@ Vous trouverez de l'information supplémentaire à propos des modules utilisés 
   + https://realpython.com/, site web recensant plusieurs tutoriels et informations en lien avec _Python_, autant pour les débutants que les programmeurs avancés!
 
 ## Workshop
- - [Code en lien avec le _workshop_](https://github.com/GabGabG/PythonBio/tree/main/Workshop) ("corrigé" des exercices du _workshop_, la structure peut changer à tout moment)
  - [Diapositives utilisées lors du _workshop_](https://ulavaldti-my.sharepoint.com/:p:/g/personal/gagen38_ulaval_ca/EeXq3DOCuBpIofxTrIlGOZUBhMDFeqXh_IhRqeVvfQEZkg?e=rFS5hi)
 
 
