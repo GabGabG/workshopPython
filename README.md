@@ -40,7 +40,7 @@ Vous trouverez de l'information supplémentaire à propos des modules utilisés 
   + https://realpython.com/, site web recensant plusieurs tutoriels et informations en lien avec _Python_, autant pour les débutants que les programmeurs avancés!
 
 ## Workshop
- - [Diapositives utilisées lors du _workshop_](https://ulavaldti-my.sharepoint.com/:p:/g/personal/gagen38_ulaval_ca/EeXq3DOCuBpIofxTrIlGOZUBhMDFeqXh_IhRqeVvfQEZkg?e=rFS5hi)
+ - [Diapositives utilisées lors du _workshop_](https://ulavaldti-my.sharepoint.com/:p:/g/personal/gagen38_ulaval_ca/EeXq3DOCuBpIofxTrIlGOZUBhMDFeqXh_IhRqeVvfQEZkg?e=VIcbih)
 
 
 # Troubleshooting
