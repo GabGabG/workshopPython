@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
 import pandas as pd
 from typing import Callable
+from scipy.stats import ttest_ind
 
 
 class TraceCalcique:
@@ -49,7 +50,7 @@ class TraceCalcique:
         self._y -= eq(self._x)
         self._y -= np.min(self._y)
 
-    def sauvegarderTrace(self, nomFichier:str):
+    def sauvegarderTrace(self, nomFichier: str):
         data = np.vstack([self._x, self._y])
         data = data.T
         df = pd.DataFrame(data, columns=["x", "y"])
@@ -130,7 +131,7 @@ class GeneratingLotsOfSpikes_differentPopulations:
         plt.legend()
         plt.show()
 
-    def savePopulations(self, filename:str):
+    def savePopulations(self, filename: str):
         cols = []
         allSpikes = []
         for i, spike in enumerate(self._spikes):
@@ -141,25 +142,29 @@ class GeneratingLotsOfSpikes_differentPopulations:
         df.to_csv(filename, index=False)
 
 
+def computeTTest(sample1, sample2):
+    return ttest_ind(sample1, sample2, equal_var=False)
+
+
 tc = TraceCalcique(-5, 105, 1000, 10, 1.5)
 tc2 = TraceCalcique(-5, 105, 1000, 15, 1.6)
 traces = TracesCalciques(tc, tc2)
-#traces.sauvegarderTraces("data/twoTracesToShow.csv")
+# traces.sauvegarderTraces("data/twoTracesToShow.csv")
 
 tcBckg = TraceCalcique(-5, 105, 1000, 28, 1.5, 4)
-# tcBckg.afficherPics()
+tcBckg.afficherPics()
 tcBckg.ajouterBckg(lambda x: -0.0002 * x ** 2 + 0.001 * x + 100)
-# tcBckg.afficherPics()
+tcBckg.afficherPics()
 # tcBckg.sauvegarderTrace("data/traceWithBackground.csv")
 x = tcBckg.x
 y = tcBckg.y
 x0, x1, x2 = np.polynomial.polynomial.polyfit(x, y, 2)
 tcBckg.enleverBckg(lambda x: x0 + x1 * x + x2 * x ** 2)
-# tcBckg.afficherPics()
-
+tcBckg.afficherPics()
 # exit()
-spikes = GeneratingLotsOfSpikes(10, 2, 1000)
-spikes2 = GeneratingLotsOfSpikes(11, 2, 1000)
+spikes = GeneratingLotsOfSpikes(10, 1.5, 1000)
+spikes2 = GeneratingLotsOfSpikes(12, 2, 1000)
 spikes_pop = GeneratingLotsOfSpikes_differentPopulations(spikes, spikes2)
 spikes_pop.showPopulations()
-spikes_pop.savePopulations("data/populationsToCompare.csv")
+# spikes_pop.savePopulations("data/populationsToCompare.csv")
+print(computeTTest(spikes.spacings, spikes2.spacings))
