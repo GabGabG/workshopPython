@@ -9,6 +9,9 @@ Les capsules vidéos sont disponibles sur YouTube:
 1. [Capsule 1](https://www.youtube.com/watch?v=xGRqj6umDQ0)
 2. [Capsule 2](https://www.youtube.com/watch?v=ECArr5dAJt4)
 
+[Powerpoint de la capsule 2](https://ulavaldti-my.sharepoint.com/:p:/g/personal/gagen38_ulaval_ca/EZr7sO8HJwtEudHnad7_vlwBnRRGDFjsyT6no2k3E__3Sw?e=yZhb6S)
+  *Si pas disponible, me contacter (Gabriel Genest)*
+
 ## Ressources supplémentaires
 Vous trouverez de l'information supplémentaire à propos des modules utilisés ainsi qu'à propos de la programmation en général aux addresses suivantes:
 
