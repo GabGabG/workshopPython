@@ -6,8 +6,8 @@ Bonjour à toutes et à tous! Bienvenue dans ce repositoire servant de point d'a
 ## Vidéos
 Les capsules vidéos sont disponibles sur YouTube:
 
-1. Capsule 1 (**bientôt disponible**, ajouter le lien)
-2. Capsule 2 (**bientôt disponible**, ajouter le lien)
+1. [Capsule 1](https://www.youtube.com/watch?v=xGRqj6umDQ0)
+2. [Capsule 2](https://www.youtube.com/watch?v=ECArr5dAJt4)
 
 ## Ressources supplémentaires
 Vous trouverez de l'information supplémentaire à propos des modules utilisés ainsi qu'à propos de la programmation en général aux addresses suivantes:
