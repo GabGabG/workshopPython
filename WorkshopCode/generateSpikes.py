@@ -103,6 +103,10 @@ class GeneratingLotsOfSpikes:
         self._nbSpikes = nbSpikes
         self._spacings = np.random.normal(self._spacingMean, self._spacingStdDev, self._nbSpikes)
 
+    @property
+    def spacings(self):
+        return self._spacings.copy()
+
     def showSpacingsHistogram(self, nbBins: int = None, density: bool = True, axis: plt.Axes = None, show: bool = True,
                               **histKwargs):
         if axis is None:
@@ -126,25 +130,36 @@ class GeneratingLotsOfSpikes_differentPopulations:
         plt.legend()
         plt.show()
 
+    def savePopulations(self, filename:str):
+        cols = []
+        allSpikes = []
+        for i, spike in enumerate(self._spikes):
+            cols.append(f"Pop {i + 1}")
+            allSpikes.append(spike.spacings)
+        data = np.vstack(allSpikes).T
+        df = pd.DataFrame(data, columns=cols)
+        df.to_csv(filename, index=False)
+
 
 tc = TraceCalcique(-5, 105, 1000, 10, 1.5)
 tc2 = TraceCalcique(-5, 105, 1000, 15, 1.6)
 traces = TracesCalciques(tc, tc2)
-traces.sauvegarderTraces("data/twoTracesToShow.csv")
+#traces.sauvegarderTraces("data/twoTracesToShow.csv")
 
 tcBckg = TraceCalcique(-5, 105, 1000, 28, 1.5, 4)
-tcBckg.afficherPics()
+# tcBckg.afficherPics()
 tcBckg.ajouterBckg(lambda x: -0.0002 * x ** 2 + 0.001 * x + 100)
-tcBckg.afficherPics()
+# tcBckg.afficherPics()
 tcBckg.sauvegarderTrace("data/traceWithBackground.csv")
 x = tcBckg.x
 y = tcBckg.y
 x0, x1, x2 = np.polynomial.polynomial.polyfit(x, y, 2)
 tcBckg.enleverBckg(lambda x: x0 + x1 * x + x2 * x ** 2)
-tcBckg.afficherPics()
+# tcBckg.afficherPics()
 
-exit()
-spikes = GeneratingLotsOfSpikes(10, 2, 100)
-spikes2 = GeneratingLotsOfSpikes(12, 2, 100)
+# exit()
+spikes = GeneratingLotsOfSpikes(10, 2, 1000)
+spikes2 = GeneratingLotsOfSpikes(11, 2, 1000)
 spikes_pop = GeneratingLotsOfSpikes_differentPopulations(spikes, spikes2)
 spikes_pop.showPopulations()
+spikes_pop.savePopulations("data/populationsToCompare.csv")
