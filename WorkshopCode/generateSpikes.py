@@ -150,7 +150,7 @@ tcBckg = TraceCalcique(-5, 105, 1000, 28, 1.5, 4)
 # tcBckg.afficherPics()
 tcBckg.ajouterBckg(lambda x: -0.0002 * x ** 2 + 0.001 * x + 100)
 # tcBckg.afficherPics()
-tcBckg.sauvegarderTrace("data/traceWithBackground.csv")
+# tcBckg.sauvegarderTrace("data/traceWithBackground.csv")
 x = tcBckg.x
 y = tcBckg.y
 x0, x1, x2 = np.polynomial.polynomial.polyfit(x, y, 2)
