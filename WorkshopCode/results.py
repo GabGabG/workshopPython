@@ -3,8 +3,8 @@ from scipy.signal import find_peaks
 from scipy.stats import ttest_ind
 import matplotlib.pyplot as plt
 
-#### Read and plot data ####
-data = np.loadtxt("data/twoTracesToShow.csv", skiprows=1, delimiter=",")
+#### Read and plot workshopData ####
+data = np.loadtxt("../workshopData/twoTracesToShow.csv", skiprows=1, delimiter=",")
 data = data.T
 x = data[0]
 y1 = data[1]
@@ -27,7 +27,7 @@ axes[1].scatter(peaksX2, peaksY2, marker="x", color="red")
 plt.show()
 
 #### Data with background ####
-data = np.loadtxt("data/traceWithBackground.csv", skiprows=1, delimiter=",")
+data = np.loadtxt("../workshopData/traceWithBackground.csv", skiprows=1, delimiter=",")
 data = data.T
 x = data[0]
 y = data[1]
@@ -46,14 +46,14 @@ plt.plot(x, y)
 plt.show()  # Not perfect, yet much much better with a simple fit.
 
 #### Statistical analysis ####
-data = np.loadtxt("data/populationsToCompare9p8.csv", skiprows=1, delimiter=",")
+data = np.loadtxt("../workshopData/populationsToCompare9p8.csv", skiprows=1, delimiter=",")
 data = data.T
 x1 = data[0]
 x2 = data[1]
 stats = ttest_ind(x1, x2, equal_var=False)
 print(stats)
 
-data = np.loadtxt("data/populationsToCompare.csv", skiprows=1, delimiter=",")
+data = np.loadtxt("../workshopData/populationsToCompare.csv", skiprows=1, delimiter=",")
 data = data.T
 x1 = data[0]
 x2 = data[1]
