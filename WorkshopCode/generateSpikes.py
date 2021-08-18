@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.signal import find_peaks
 import pandas as pd
+from typing import Callable
 
 
 class TraceCalcique:
@@ -40,6 +41,19 @@ class TraceCalcique:
         xpeaks = self._x[peaks]
         ypeaks = self._y[peaks]
         return xpeaks.copy(), ypeaks.copy()
+
+    def ajouterBckg(self, eq: Callable):
+        self._y += eq(self._x)
+
+    def enleverBckg(self, eq: Callable):
+        self._y -= eq(self._x)
+        self._y -= np.min(self._y)
+
+    def sauvegarderTrace(self, nomFichier:str):
+        data = np.vstack([self._x, self._y])
+        data = data.T
+        df = pd.DataFrame(data, columns=["x", "y"])
+        df.to_csv(nomFichier, index=False)
 
     def afficherPics(self, axis: plt.Axes = None, show: bool = True, afficherEspacementsEstimes: bool = True):
         if axis is None:
@@ -81,8 +95,56 @@ class TracesCalciques:
         df.to_csv(nomFichier, index=False)
 
 
+class GeneratingLotsOfSpikes:
+
+    def __init__(self, spacingMean: float, spacingStdDev: float, nbSpikes: int = 1000):
+        self._spacingMean = spacingMean
+        self._spacingStdDev = spacingStdDev
+        self._nbSpikes = nbSpikes
+        self._spacings = np.random.normal(self._spacingMean, self._spacingStdDev, self._nbSpikes)
+
+    def showSpacingsHistogram(self, nbBins: int = None, density: bool = True, axis: plt.Axes = None, show: bool = True,
+                              **histKwargs):
+        if axis is None:
+            fig, axis = plt.subplots()
+        if nbBins is None:
+            nbBins = int(self._nbSpikes ** 0.5)
+        axis.hist(self._spacings, nbBins, density=density, **histKwargs)
+        if show:
+            plt.show()
+
+
+class GeneratingLotsOfSpikes_differentPopulations:
+
+    def __init__(self, *spikes: GeneratingLotsOfSpikes):
+        self._spikes = spikes
+
+    def showPopulations(self, densities: bool = True):
+        fig, axis = plt.subplots()
+        for i, spike in enumerate(self._spikes):
+            spike.showSpacingsHistogram(None, densities, axis, False, alpha=0.5, label=f"Pop {i + 1}")
+        plt.legend()
+        plt.show()
+
+
 tc = TraceCalcique(-5, 105, 1000, 10, 1.5)
 tc2 = TraceCalcique(-5, 105, 1000, 15, 1.6)
 traces = TracesCalciques(tc, tc2)
 traces.sauvegarderTraces("data/twoTracesToShow.csv")
 
+tcBckg = TraceCalcique(-5, 105, 1000, 28, 1.5, 4)
+tcBckg.afficherPics()
+tcBckg.ajouterBckg(lambda x: -0.0002 * x ** 2 + 0.001 * x + 100)
+tcBckg.afficherPics()
+tcBckg.sauvegarderTrace("data/traceWithBackground.csv")
+x = tcBckg.x
+y = tcBckg.y
+x0, x1, x2 = np.polynomial.polynomial.polyfit(x, y, 2)
+tcBckg.enleverBckg(lambda x: x0 + x1 * x + x2 * x ** 2)
+tcBckg.afficherPics()
+
+exit()
+spikes = GeneratingLotsOfSpikes(10, 2, 100)
+spikes2 = GeneratingLotsOfSpikes(12, 2, 100)
+spikes_pop = GeneratingLotsOfSpikes_differentPopulations(spikes, spikes2)
+spikes_pop.showPopulations()
